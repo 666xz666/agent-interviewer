@@ -1,0 +1,15 @@
+server:
+  tomcat:
+    uri-encoding: utf-8
+    max-swallow-size: -1 # 先不设置请求体大小
+
+spring:
+  application:
+    name: agent-interviewer
+  profiles:
+    active: dev # dev prod test
+
+logging:
+  level:
+    root: info
+
