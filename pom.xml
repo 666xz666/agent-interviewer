@@ -37,7 +37,24 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- MinIO -->
+            <dependency>
+                <groupId>io.minio</groupId>
+                <artifactId>minio</artifactId>
+                <version>8.5.5</version>
+            </dependency>
 
+            <dependency>
+                <groupId>com.a3test.component</groupId>
+                <artifactId>idworker-snowflake</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>2.11.0</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
