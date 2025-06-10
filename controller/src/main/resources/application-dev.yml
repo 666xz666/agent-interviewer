@@ -2,7 +2,11 @@ server:
   port: 8080
 
 spring:
-  
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
 
 minio:
   endpoint: http://127.0.0.1:9000      # MinIO的服务地址
