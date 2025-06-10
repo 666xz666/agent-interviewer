@@ -1,6 +1,8 @@
 server:
   port: 8080
 
+spring:
+  
 
 minio:
   endpoint: http://127.0.0.1:9000      # MinIO的服务地址
