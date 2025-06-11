@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.agentpioneer.mapper.ResumeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.agentpioneer.pojo.Resume">
+        <id column="resume_id" property="resumeId" />
+        <result column="user_id" property="userId" />
+        <result column="original_file_name" property="originalFileName" />
+        <result column="structured_data" property="structuredData" />
+        <result column="status" property="status" />
+        <result column="rabbitmq_job_id" property="rabbitmqJobId" />
+        <result column="processing_start_time" property="processingStartTime" />
+        <result column="processing_end_time" property="processingEndTime" />
+        <result column="error_message" property="errorMessage" />
+        <result column="created_at" property="createdAt" />
+        <result column="updated_at" property="updatedAt" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        resume_id, user_id, original_file_name, structured_data, status, rabbitmq_job_id, processing_start_time, processing_end_time, error_message, created_at, updated_at
+    </sql>
+
+</mapper>

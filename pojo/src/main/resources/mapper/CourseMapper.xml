@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.agentpioneer.mapper.CourseMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.agentpioneer.pojo.Course">
+        <id column="course_id" property="courseId" />
+        <result column="course_name" property="courseName" />
+        <result column="course_link" property="courseLink" />
+        <result column="course_description" property="courseDescription" />
+        <result column="course_type" property="courseType" />
+        <result column="target_jobs" property="targetJobs" />
+        <result column="uploader" property="uploader" />
+        <result column="upload_time" property="uploadTime" />
+        <result column="status" property="status" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        course_id, course_name, course_link, course_description, course_type, target_jobs, uploader, upload_time, status
+    </sql>
+
+</mapper>

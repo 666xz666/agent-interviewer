@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.agentpioneer.mapper.AiInterviewerMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.agentpioneer.pojo.AiInterviewer">
+        <id column="interviewer_id" property="interviewerId" />
+        <result column="name" property="name" />
+        <result column="gender" property="gender" />
+        <result column="description" property="description" />
+        <result column="api_service_id" property="apiServiceId" />
+        <result column="created_at" property="createdAt" />
+        <result column="updated_at" property="updatedAt" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        interviewer_id, name, gender, description, api_service_id, created_at, updated_at
+    </sql>
+
+</mapper>
