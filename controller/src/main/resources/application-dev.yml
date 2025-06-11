@@ -23,6 +23,12 @@ spring:
     port: 5672
     username: guest
     password: guest
+  data:
+    redis:
+      host: 127.0.0.1     # 填写redis服务所在的ip地址（建议内网ip）
+      port: 5379
+      database: 0
+      password: 123456
 
 minio:
   endpoint: http://127.0.0.1:9000      # MinIO的服务地址
