@@ -1,4 +1,5 @@
 server:
+  port: 8080
   tomcat:
     uri-encoding: utf-8
     max-swallow-size: -1 # 先不设置请求体大小
@@ -13,3 +14,6 @@ logging:
   level:
     root: info
 
+springdoc:
+  swagger-ui:
+    path: /docs
