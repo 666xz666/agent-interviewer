@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
-@Tag(name = "认证接口", description = "用户登录、注册相关接口")
+@Tag(name = "认证接口", description = "用户登录、注册、cookie验证相关接口")
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -89,7 +89,7 @@ public class AuthController {
         return GraceJSONResult.ok();
     }
 
-    @Operation(summary = "获取用户信息", description = "根据用户ID获取用户信息")
+    @Operation(summary = "会话验证", description = "验证cookie")
     @PostMapping("/session")
     public GraceJSONResult session(HttpServletRequest request) {
         Long userId = JwtUtil.getUserIdFromCookie(request);

@@ -12,6 +12,10 @@ public enum ResponseStatusEnum {
 
     BO_FAILED(599, false, "表单数据校验失败！"),
 
+    EMAIL_NULL_ERROR(501, false, "邮箱不能为空！"),
+    USERNAME_EXISTS_ERROR(502, false, "用户名已存在！"),
+    EMAIL_EXISTS_ERROR(503, false, "邮箱已被使用！"),
+
     // 50x
     UN_LOGIN(501,false,"请登录后再继续操作！"),
     TICKET_INVALID(502,false,"会话失效，请重新登录！"),

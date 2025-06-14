@@ -3,12 +3,18 @@ package com.agentpioneer.service.impl;
 import com.agentpioneer.mapper.UserMapper;
 import com.agentpioneer.pojo.User;
 import com.agentpioneer.pojo.bo.AuthBO;
+import com.agentpioneer.pojo.bo.UserUpdateBO;
+import com.agentpioneer.result.BusinessException;
+import com.agentpioneer.result.ResponseStatusEnum;
 import com.agentpioneer.service.UserService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -36,6 +42,8 @@ public class UserServiceImpl implements UserService {
 
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("username", user.getUsername());
+        queryWrapper.or();
+        queryWrapper.eq("email", user.getEmail());
         User user1 = userMapper.selectOne(queryWrapper);
         if (user1 != null) return false;
 
@@ -66,11 +74,59 @@ public class UserServiceImpl implements UserService {
             return null;
         }
 
+        user1.setLastLoginTime(LocalDateTime.now());
+        userMapper.updateById(user1);
+
         return user1;
     }
 
     @Override
     public User getUserInfo(Long userId) {
         return userMapper.selectById(userId);
+    }
+
+    @Override
+    public void updateUserInfo(UserUpdateBO userUpdateBO) throws BusinessException {
+        Long userId = userUpdateBO.getUserId();
+        User user = getUserInfo(userId);
+        if (user == null) {
+            throw new BusinessException(ResponseStatusEnum.PAYMENT_USER_INFO_ERROR);
+        }
+
+        if (Objects.equals(userUpdateBO.getUsername(), "")) {
+            throw new BusinessException(ResponseStatusEnum.ADMIN_USERNAME_NULL_ERROR);
+        }
+        if (userUpdateBO.getUsername() != null && !Objects.equals(userUpdateBO.getUsername(), user.getUsername())) {
+            QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("username", userUpdateBO.getUsername());
+            User existingUser = userMapper.selectOne(queryWrapper);
+            if (existingUser != null) {
+                throw new BusinessException(ResponseStatusEnum.USERNAME_EXISTS_ERROR);
+            }
+        }
+        if (Objects.equals(userUpdateBO.getEmail(), "")) {
+            throw new BusinessException(ResponseStatusEnum.EMAIL_NULL_ERROR);
+        }
+        if (userUpdateBO.getEmail() != null && !Objects.equals(userUpdateBO.getEmail(), user.getEmail())) {
+            QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("email", userUpdateBO.getEmail());
+            User existingUser = userMapper.selectOne(queryWrapper);
+            if (existingUser != null) {
+                throw new BusinessException(ResponseStatusEnum.EMAIL_EXISTS_ERROR);
+            }
+        }
+
+//        if (userUpdateBO.getPassword() == null) {
+//            throw new BusinessException(ResponseStatusEnum.ADMIN_PASSWORD_NULL_ERROR);
+//        }
+//        String passwordHashed = encoder.encode(userUpdateBO.getPassword());
+//        userUpdateBO.setPassword(passwordHashed);
+
+        BeanUtils.copyProperties(userUpdateBO, user);
+        int res = userMapper.updateById(user);
+
+        if (res != 1) {
+            throw new BusinessException(ResponseStatusEnum.FAILED);
+        }
     }
 }
