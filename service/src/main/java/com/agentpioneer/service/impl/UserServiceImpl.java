@@ -8,19 +8,30 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
+    BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
     @Override
     public boolean register(AuthBO authBO) {
+        if (authBO == null || authBO.getUsername() == null || authBO.getPassword() == null) {
+            return false;
+        }
+
         // 实现注册逻辑
         User user = new User();
         BeanUtils.copyProperties(authBO, user);
         user.setUsername(user.getUsername());
-        user.setPassword(user.getPassword());
+
+        String password =  user.getPassword();
+        String passwordHashed = encoder.encode(password);
+        user.setPassword(passwordHashed);
+
         user.setEmail(user.getEmail());
 
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
@@ -34,15 +45,26 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User validate(AuthBO authBO) {
+        if (
+                authBO == null ||
+                (authBO.getUsername() == null && authBO.getEmail() == null) ||
+                authBO.getPassword() == null
+        ) {
+            return null;
+        }
+
         User user = new User();
         BeanUtils.copyProperties(authBO, user);
 
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("password", user.getPassword())
-                    .and(wrapper -> wrapper.eq("username", user.getUsername())
+        queryWrapper.and(wrapper -> wrapper.eq("username", user.getUsername())
                                           .or()
                                           .eq("email", user.getEmail()));
         User user1 = userMapper.selectOne(queryWrapper);
+
+        if (!encoder.matches(user.getPassword(), user1.getPassword())) {
+            return null;
+        }
 
         return user1;
     }
