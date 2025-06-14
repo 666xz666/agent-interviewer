@@ -37,3 +37,7 @@ minio:
   accessKey: 83AvOqpz1Plu5E53EDZG      # 访问密钥Access Key
   secretKey: lYuWZK7yx1oSCYwiwK2ziPH637fOTK55w4yGCvxi  # 密钥Secret Key
 
+xunfei:
+  appId: a006ee60
+  apiKey: d98ad0cb6bfd95a28eefd794415cc48f
+  apiSecret: OTdmNzliNjVlNjdmZjA1NmI4MzU1YjFj

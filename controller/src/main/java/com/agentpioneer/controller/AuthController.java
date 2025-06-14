@@ -1,8 +1,6 @@
 package com.agentpioneer.controller;
 
 
-//import com.agentpioneer.annotations.SwaggerRequestBody;
-
 import com.agentpioneer.pojo.User;
 import com.agentpioneer.pojo.bo.AuthBO;
 import com.agentpioneer.result.GraceJSONResult;
@@ -10,7 +8,6 @@ import com.agentpioneer.result.ResponseStatusEnum;
 import com.agentpioneer.service.UserService;
 import com.agentpioneer.utils.JwtUtil;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.tags.Tag;

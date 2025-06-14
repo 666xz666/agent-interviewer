@@ -165,3 +165,10 @@
 
 
 * 添加课程视频，给出链接、描述，标明针对的是哪些岗位
+
+## 讯飞语音识别包导入
+
+```shell
+mvn install:install-file -DgroupId="com.iflytek" -DartifactId=Msc -Dversion="1.0" -Dpackaging=jar -Dfile="./lib/Msc.jar"
+
+```
