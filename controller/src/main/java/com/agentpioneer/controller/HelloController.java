@@ -30,6 +30,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -95,6 +96,9 @@ public class HelloController {
         return GraceJSONResult.ok(resultString);
     }
 
+    @Value("${xf.config.appId}")
+    private String appId;
+
     /**
      * @ Description: 测试路由
      * @ return
@@ -117,6 +121,7 @@ public class HelloController {
     })
     @GetMapping("hello")
     public Object hello(@RequestParam(required = false) String name) {
+        System.out.println(appId);
         if (name != null) {
             return "Hello " + name + "! Welcome to pioneer.";
         }

@@ -5,7 +5,6 @@ target/
 
 logs/
 voice_source/
-controller/src/main/resources/application-dev.yml
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
@@ -15,7 +14,7 @@ controller/src/main/resources/application-dev.yml
 *.iws
 *.iml
 *.ipr
-.env
+**/.env.properties
 
 ### Eclipse ###
 .apt_generated

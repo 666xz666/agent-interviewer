@@ -17,6 +17,8 @@ spring:
       idle-timeout: 600000                    # 连接超时的最大时长（毫秒），超时则会被释放（retired）
       max-lifetime: 18000000                  # 连接池的最大生命时长（毫秒），超时则会被释放（retired）
       connection-test-query: SELECT 1
+  config:
+    import: optional:.env.properties
 
   rabbitmq:
     host: 127.0.0.1
@@ -32,9 +34,10 @@ spring:
 
 xf:
   config:
-    appId: a006ee60
-    apiSecret: OTdmNzliNjVlNjdmZjA1NmI4MzU1YjFj
-    apiKey: d98ad0cb6bfd95a28eefd794415cc48f
+    #    appId: a006ee60
+    appId: ${APP_ID}
+    apiSecret: ${API_SECRET}
+    apiKey: ${API_KEY}
 
 tts:
   voiceSource: D:/xz/agent-interviewer/voice_source/
@@ -42,7 +45,7 @@ tts:
 aliyun: #阿里云OSS的配置
   oss:
     file:
-      endpoint: oss-cn-beijing.aliyuncs.com
-      access-key-id: LTAI5tSH44Mm2phtyuj5tfom
-      secret-access-key: VrGAuQ5CTDdqI2BFXNI8EsMqtweDSQ
-      bucket: pic--oss
+      endpoint: ${END_POINT}
+      access-key-id: ${AK_ID}
+      secret-access-key: ${S_AK}
+      bucket: ${BUCKET_NAME}
