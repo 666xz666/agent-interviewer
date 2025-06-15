@@ -42,5 +42,21 @@ xunfei:
   apiKey: d98ad0cb6bfd95a28eefd794415cc48f
   apiSecret: OTdmNzliNjVlNjdmZjA1NmI4MzU1YjFj
 
-xunfeiMSC:
-  appId: 8737ef21 # SDK内含鉴权信息，所以与特定APPID绑定
+xf:
+  config:
+    hostUrl: https://spark-api.xf-yun.com/v4.0/chat
+    appId: a006ee60
+    apiSecret: OTdmNzliNjVlNjdmZjA1NmI4MzU1YjFj
+    apiKey: d98ad0cb6bfd95a28eefd794415cc48f
+    maxResponseTime: 40
+
+tts:
+  voiceSource: D:/xz/agent-interviewer/voice_source/
+
+aliyun: #阿里云的配置
+  oss:
+    file:
+      endpoint: oss-cn-beijing.aliyuncs.com
+      access-key-id: LTAI5tSH44Mm2phtyuj5tfom
+      secret-access-key: VrGAuQ5CTDdqI2BFXNI8EsMqtweDSQ
+      bucket: pic--oss

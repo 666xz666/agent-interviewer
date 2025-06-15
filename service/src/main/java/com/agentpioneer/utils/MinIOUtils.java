@@ -1,4 +1,4 @@
-package com.agentpioneer.base;
+package com.agentpioneer.utils;
 
 import io.minio.*;
 import io.minio.http.Method;

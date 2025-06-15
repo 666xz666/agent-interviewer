@@ -4,6 +4,7 @@ target/
 !**/src/test/**/target/
 
 logs/
+voice_source/
 
 ### IntelliJ IDEA ###
 .idea/modules.xml

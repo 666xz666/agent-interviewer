@@ -1,5 +1,6 @@
-package com.agentpioneer.base;
+package com.agentpioneer.config;
 
+import com.agentpioneer.utils.MinIOUtils;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

@@ -16,6 +16,9 @@ public enum ResponseStatusEnum {
     USERNAME_EXISTS_ERROR(502, false, "用户名已存在！"),
     EMAIL_EXISTS_ERROR(503, false, "邮箱已被使用！"),
 
+    INVALID_PARAMS(500, false, "文本不能为空!"),
+
+
     // 50x
     UN_LOGIN(501,false,"请登录后再继续操作！"),
     TICKET_INVALID(502,false,"会话失效，请重新登录！"),

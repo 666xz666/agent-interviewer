@@ -1,6 +1,11 @@
 package com.agentpioneer.controller;
 
 
+import com.agentpioneer.pojo.bo.CreateVoiceBO;
+import com.agentpioneer.result.BusinessException;
+import com.agentpioneer.result.GraceJSONResult;
+import com.agentpioneer.result.ResponseStatusEnum;
+import com.agentpioneer.xunfei.WebTtsWs;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.briqt.spark4j.SparkClient;
@@ -17,16 +22,15 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -45,6 +49,51 @@ public class HelloController {
 
     @Autowired
     private SparkClient sparkClient;
+
+    @Resource
+    private WebTtsWs webTtsWs;
+
+    @Operation(
+            summary = "创建语音",
+            description = "根据提供的文本创建语音。",
+            tags = {"测试接口"}
+    )
+    @PostMapping("/createVoice")
+    public GraceJSONResult createVoice(
+            @RequestBody
+            @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                    description = "创建语音请求体",
+                    required = true,
+                    content = @Content(
+                            mediaType = "application/json",
+                            examples = {
+                                    @ExampleObject(
+                                            name = "创建语音示例",
+                                            summary = "创建语音请求体示例",
+                                            value = "{\"content\": \"你好，我叫许战，来自中国矿业大学\", \"vcn\": \"aisjiuxu\"}"
+                                    )
+                            }
+                    )
+            )
+            CreateVoiceBO createVoiceBO
+
+    ) {
+        String resultString = null;
+        try {
+            resultString = webTtsWs.createVoice(
+                    createVoiceBO.getContent(), createVoiceBO.getVcn()
+            );
+            Thread.sleep(3000);//等语音生成完成了再关闭，给一点等待时间
+        } catch (BusinessException e) {
+            logger.error(e.getStatus().msg());
+            return GraceJSONResult.errorCustom(e.getStatus());
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return GraceJSONResult.errorCustom(ResponseStatusEnum.FILE_UPLOAD_FAILD);
+        }
+
+        return GraceJSONResult.ok(resultString);
+    }
 
     /**
      * @ Description: 测试路由
