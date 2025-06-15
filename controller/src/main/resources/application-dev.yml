@@ -30,30 +30,16 @@ spring:
       database: 0
       password: 123456
 
-minio:
-  endpoint: http://127.0.0.1:9000      # MinIO的服务地址
-  fileHost: http://127.0.0.1:9000      # 文件地址host
-  bucketName: ai-interviewer           # 存储桶bucket的名称
-  accessKey: 83AvOqpz1Plu5E53EDZG      # 访问密钥Access Key
-  secretKey: lYuWZK7yx1oSCYwiwK2ziPH637fOTK55w4yGCvxi  # 密钥Secret Key
-
-xunfei:
-  appId: a006ee60
-  apiKey: d98ad0cb6bfd95a28eefd794415cc48f
-  apiSecret: OTdmNzliNjVlNjdmZjA1NmI4MzU1YjFj
-
 xf:
   config:
-    hostUrl: https://spark-api.xf-yun.com/v4.0/chat
     appId: a006ee60
     apiSecret: OTdmNzliNjVlNjdmZjA1NmI4MzU1YjFj
     apiKey: d98ad0cb6bfd95a28eefd794415cc48f
-    maxResponseTime: 40
 
 tts:
   voiceSource: D:/xz/agent-interviewer/voice_source/
 
-aliyun: #阿里云的配置
+aliyun: #阿里云OSS的配置
   oss:
     file:
       endpoint: oss-cn-beijing.aliyuncs.com

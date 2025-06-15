@@ -40,11 +40,11 @@ public class WebTtsWs {
     // 地址与鉴权信息
     public static final String hostUrl = "https://tts-api.xfyun.cn/v2/tts";
     // 均到控制台-语音合成页面获取
-    @Value("${xunfei.appId}")
+    @Value("${xf.config.appId}")
     public String appid;
-    @Value("${xunfei.apiSecret}")
+    @Value("${xf.config.apiSecret}")
     public String apiSecret;
-    @Value("${xunfei.apiKey}")
+    @Value("${xf.config.apiKey}")
     public String apiKey;
     // 合成文本
     public static final String TEXT = "讯飞的文字合成语音功能，测试成功";
