@@ -34,7 +34,6 @@ spring:
 
 xf:
   config:
-    #    appId: a006ee60
     appId: ${APP_ID}
     apiSecret: ${API_SECRET}
     apiKey: ${API_KEY}
