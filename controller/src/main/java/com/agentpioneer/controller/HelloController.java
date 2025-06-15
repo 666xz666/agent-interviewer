@@ -21,12 +21,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.iflytek.cloud.speech.SpeechConstant;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,6 +40,8 @@ import java.util.Map;
 @RestController
 @RequestMapping("/test")
 public class HelloController {
+
+    Logger logger = org.slf4j.LoggerFactory.getLogger(HelloController.class);
 
     @Autowired
     private SparkClient sparkClient;

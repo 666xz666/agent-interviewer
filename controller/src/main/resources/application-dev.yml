@@ -41,3 +41,6 @@ xunfei:
   appId: a006ee60
   apiKey: d98ad0cb6bfd95a28eefd794415cc48f
   apiSecret: OTdmNzliNjVlNjdmZjA1NmI4MzU1YjFj
+
+xunfeiMSC:
+  appId: 8737ef21 # SDK内含鉴权信息，所以与特定APPID绑定

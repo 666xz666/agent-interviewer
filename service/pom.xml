@@ -49,10 +49,5 @@
             <artifactId>minio</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.iflytek</groupId>
-            <artifactId>msc</artifactId>
-        </dependency>
-
     </dependencies>
 </project>

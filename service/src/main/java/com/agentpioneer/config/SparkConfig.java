@@ -2,6 +2,8 @@ package com.agentpioneer.config;
 
 
 import io.github.briqt.spark4j.SparkClient;
+import jakarta.annotation.PostConstruct;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import lombok.Data;
 import org.springframework.context.annotation.Bean;
@@ -16,6 +18,9 @@ public class SparkConfig {
     private String secretKey;
     @Value("${xunfei.appId}")
     private String appId;
+
+    @Value("${xunfeiMSC.appId}")
+    private String mscAppId;
 
     @Bean
     SparkClient getSparkClient() {
