@@ -5,6 +5,7 @@ import com.agentpioneer.pojo.bo.CreateVoiceBO;
 import com.agentpioneer.result.BusinessException;
 import com.agentpioneer.result.GraceJSONResult;
 import com.agentpioneer.result.ResponseStatusEnum;
+import com.agentpioneer.service.IMilvusService;
 import com.agentpioneer.xunfei.WebTtsWs;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -310,5 +311,82 @@ public class HelloController {
         }
 
         return scores;
+    }
+
+    @Resource
+    private IMilvusService milvusService;
+
+    /**
+     * 测试创建集合
+     *
+     * @return 操作结果信息
+     */
+    @GetMapping("/createCollection")
+    public String createCollection() {
+        String collectionName = "test_collection";
+        String desc = "This is a test collection";
+        milvusService.create(collectionName, desc);
+        return "Collection " + collectionName + " created successfully";
+    }
+
+    /**
+     * 测试插入数据
+     *
+     * @return 操作结果信息
+     */
+    @GetMapping("/insertData")
+    public String insertData() {
+        String collectionName = "test_collection";
+        List<Long> fileIds = new ArrayList<>();
+        fileIds.add(1L);
+        fileIds.add(2L);
+
+        List<Long> textIds = new ArrayList<>();
+        textIds.add(1L);
+        textIds.add(2L);
+
+        List<List<Float>> vectorList = new ArrayList<>();
+        List<Float> vector1 = new ArrayList<>();
+        vector1.add(0.1f);
+        vector1.add(0.2f);
+        vectorList.add(vector1);
+
+        List<Float> vector2 = new ArrayList<>();
+        vector2.add(0.3f);
+        vector2.add(0.4f);
+        vectorList.add(vector2);
+
+        boolean result = milvusService.insert(collectionName, textIds, vectorList, fileIds);
+        return result ? "Data inserted successfully" : "Data insertion failed";
+    }
+
+    /**
+     * 测试向量搜索
+     *
+     * @return 搜索结果
+     */
+    @GetMapping("/searchData")
+    public List<Long> searchData() {
+        String collectionName = "test_collection";
+        int topK = 2;
+        List<List<Float>> vectorList = new ArrayList<>();
+        List<Float> searchVector = new ArrayList<>();
+        searchVector.add(0.15f);
+        searchVector.add(0.25f);
+        vectorList.add(searchVector);
+
+        return milvusService.search(collectionName, topK, vectorList);
+    }
+
+    /**
+     * 测试删除集合
+     *
+     * @return 操作结果信息
+     */
+    @GetMapping("/dropCollection")
+    public String dropCollection() {
+        String collectionName = "test_collection";
+        milvusService.dropCollect(collectionName);
+        return "Collection " + collectionName + " dropped successfully";
     }
 }
