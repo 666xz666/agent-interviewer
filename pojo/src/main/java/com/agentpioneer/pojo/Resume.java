@@ -1,5 +1,7 @@
 package com.agentpioneer.pojo;
 
+import com.agentpioneer.pojo.enums.ResumeStatus;
+import com.baomidou.mybatisplus.annotation.EnumValue;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 

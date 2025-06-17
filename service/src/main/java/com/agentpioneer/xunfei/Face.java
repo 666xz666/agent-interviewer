@@ -26,10 +26,10 @@ public class Face {
     private static final String URL = "http://tupapi.xfyun.cn/v1/expression";
     // 应用ID(必须为webapi类型应用,并人脸特征分析服务,参考帖子如何创建一个webapi应用：http://bbs.xfyun.cn/forum.php?mod=viewthread&tid=36481)
     @Value("${xf.config.appId}")
-    private String APPID = "。。。。。。。";
+    private String APPID;
     // 接口密钥(webapi类型应用开通人脸特征分析服务后，控制台--我的应用---人脸特征分析---服务的apikey
     @Value("${xf.config.apiKey}")
-    private String API_KEY = "。。。。。。。";
+    private String API_KEY;
     // 图片数据可以通过两种方式上传，第一种在请求头设置image_url参数，第二种将图片二进制数据写入请求体中。若同时设置，以第一种为准。
     // 此demo使用第二种方式进行上传图片地址，如果想使用第一种方式，请求体为空即可。
     // 图片名称

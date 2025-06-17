@@ -2,6 +2,7 @@ package com.agentpioneer.controller;
 
 
 import com.agentpioneer.pojo.bo.CreateVoiceBO;
+import com.agentpioneer.pojo.bo.ResumeBO;
 import com.agentpioneer.result.BusinessException;
 import com.agentpioneer.result.GraceJSONResult;
 import com.agentpioneer.result.ResponseStatusEnum;
@@ -127,6 +128,16 @@ public class HelloController {
             return "Hello " + name + "! Welcome to pioneer.";
         }
         return "hello pioneer";
+    }
+
+    @PostMapping("resumeTest2")
+    @Operation(summary = "Spark 函数调用测试", description = "测试 Spark 函数调用接口")
+    public GraceJSONResult resumeTest2(
+            @RequestBody
+            ResumeBO resumeBO
+    ) {
+        
+        return GraceJSONResult.ok();
     }
 
     @GetMapping("spark-chat")

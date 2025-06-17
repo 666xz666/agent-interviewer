@@ -66,8 +66,7 @@ public class FaceController {
             @RequestParam("file") MultipartFile file
     ) throws IOException {
         String fileName = file.getOriginalFilename();
-        String faceExpression = face.getFaceExpression(fileName, file);
-        return faceExpression;
+        return face.getFaceExpression(fileName, file);
     }
 
 }

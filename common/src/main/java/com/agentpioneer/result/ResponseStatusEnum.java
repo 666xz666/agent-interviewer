@@ -17,7 +17,8 @@ public enum ResponseStatusEnum {
     EMAIL_EXISTS_ERROR(503, false, "邮箱已被使用！"),
 
     INVALID_PARAMS(500, false, "文本不能为空!"),
-
+    RESUME_NOT_FOUND(504, false, "简历不存在!"),
+    RESUME_PROCESSING(505, false, "简历处理中禁止操作"),
 
     // 50x
     UN_LOGIN(501,false,"请登录后再继续操作！"),
