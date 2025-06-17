@@ -20,6 +20,7 @@ import io.milvus.param.index.CreateIndexParam;
 import io.milvus.response.SearchResultsWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -49,7 +50,8 @@ public class MilvusServiceImpl implements MilvusService {
     private final String VECTOR = "vector";
     private final String FILE_ID = "file_id";
 
-    private final int dimension = 2;
+    @Value("${embedding.dim}")
+    private int dimension;
 
 
     /**

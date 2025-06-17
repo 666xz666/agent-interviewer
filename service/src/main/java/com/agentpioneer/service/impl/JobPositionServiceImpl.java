@@ -7,6 +7,7 @@ import com.agentpioneer.pojo.vo.JobPositionVO;
 import com.agentpioneer.result.BusinessException;
 import com.agentpioneer.result.ResponseStatusEnum;
 import com.agentpioneer.service.JobPositionService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.milvus.common.utils.JsonUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,18 @@ public class JobPositionServiceImpl implements JobPositionService {
         }
     }
 
+    @Override
     public List<JobPositionVO> listJobPositions() throws BusinessException {
         return jobPositionMapper.listJobPositions();
+    }
+
+    @Override
+    public Boolean exists(Long id) {
+        if (id == null) {
+            return false;
+        }
+        QueryWrapper<JobPosition> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("job_id", id);
+        return jobPositionMapper.exists(queryWrapper);
     }
 }

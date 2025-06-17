@@ -12,4 +12,6 @@ public interface JobPositionService {
     public void create(JobPositionBO jobPositionBO, Long userId) throws BusinessException;
 
     public List<JobPositionVO> listJobPositions() throws BusinessException;
+
+    public Boolean exists(Long id);
 }
