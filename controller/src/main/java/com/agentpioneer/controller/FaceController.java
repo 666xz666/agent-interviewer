@@ -19,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 @Tag(
-        name = "人脸识别",
+        name = "人脸识别接口",
         description = "人脸识别"
 )
 @RestController

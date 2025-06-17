@@ -1,6 +1,6 @@
 package com.agentpioneer.service.impl;
 
-import com.agentpioneer.service.IMilvusService;
+import com.agentpioneer.service.MilvusService;
 import com.google.common.collect.Lists;
 import io.milvus.client.MilvusServiceClient;
 import io.milvus.common.clientenum.ConsistencyLevelEnum;
@@ -16,10 +16,6 @@ import io.milvus.param.collection.*;
 import io.milvus.param.dml.DeleteParam;
 import io.milvus.param.dml.InsertParam;
 import io.milvus.param.dml.SearchParam;
-import io.milvus.param.highlevel.collection.ListCollectionsParam;
-import io.milvus.param.highlevel.collection.response.ListCollectionsResponse;
-import io.milvus.param.highlevel.dml.DeleteIdsParam;
-import io.milvus.param.highlevel.dml.response.DeleteResponse;
 import io.milvus.param.index.CreateIndexParam;
 import io.milvus.response.SearchResultsWrapper;
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +30,7 @@ import java.util.Map;
 
 @Slf4j
 @Service
-public class MilvusServiceImpl implements IMilvusService {
+public class MilvusServiceImpl implements MilvusService {
 
     @Autowired
     private MilvusServiceClient milvusServiceClient;

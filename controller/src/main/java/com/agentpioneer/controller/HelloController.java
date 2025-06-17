@@ -6,7 +6,7 @@ import com.agentpioneer.pojo.bo.ResumeBO;
 import com.agentpioneer.result.BusinessException;
 import com.agentpioneer.result.GraceJSONResult;
 import com.agentpioneer.result.ResponseStatusEnum;
-import com.agentpioneer.service.IMilvusService;
+import com.agentpioneer.service.MilvusService;
 import com.agentpioneer.xunfei.WebTtsWs;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -325,7 +325,7 @@ public class HelloController {
     }
 
     @Resource
-    private IMilvusService milvusService;
+    private MilvusService milvusService;
 
     /**
      * 测试创建集合

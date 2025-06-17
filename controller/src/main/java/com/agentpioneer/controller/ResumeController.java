@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @Tag(
-        name = "简历模块",
+        name = "简历接口",
         description = "简历相关接口"
 )
 @RestController

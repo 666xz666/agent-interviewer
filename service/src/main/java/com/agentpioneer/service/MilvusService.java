@@ -8,7 +8,7 @@ import java.util.List;
  * @author Jx
  * @version 2024-3-18
  */
-public interface IMilvusService {
+public interface MilvusService {
     Boolean hasCollect(String collectionName);
 
     void create(String collectionName, String desc);
