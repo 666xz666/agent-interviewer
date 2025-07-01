@@ -2,6 +2,7 @@ package com.agentpioneer.service.impl;
 
 import com.agentpioneer.mapper.KnowledgeBaseMapper;
 import com.agentpioneer.pojo.KnowledgeBase;
+import com.agentpioneer.pojo.KnowledgeFile;
 import com.agentpioneer.pojo.bo.KnowledgeBaseBO;
 import com.agentpioneer.pojo.vo.KnowledgeBaseVO;
 import com.agentpioneer.result.BusinessException;
@@ -9,11 +10,15 @@ import com.agentpioneer.result.ResponseStatusEnum;
 import com.agentpioneer.service.JobPositionService;
 import com.agentpioneer.service.KBService;
 import com.agentpioneer.service.MilvusService;
+import com.agentpioneer.utils.OssUtils;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -26,6 +31,9 @@ public class KBServiceImpl implements KBService {
 
     @Autowired
     JobPositionService jobPositionService;
+
+    @Autowired
+    OssUtils ossUtils;
 
     @Override
     public void create(KnowledgeBaseBO knowledgeBaseBO, Long userId) throws BusinessException {
@@ -104,4 +112,47 @@ public class KBServiceImpl implements KBService {
             return kbVO;
         }).toList();
     }
+
+//    public void uploadFiles(MultipartFile[] files, Long kbId, Long userId) throws BusinessException {
+//        KnowledgeBase knowledgeBase = knowledgeBaseMapper.selectById(kbId);
+//        if (knowledgeBase == null) {
+//            throw new BusinessException(ResponseStatusEnum.KB_NOT_EXIST);
+//        }
+//
+//        List<KnowledgeFile> knowledgeFiles = new ArrayList<>();
+//
+//        for (MultipartFile file : files) {
+//            try {
+//                String filePath = ossUtils.uploadFile(file);
+//
+//                if (filePath != null) {
+//                    KnowledgeFile knowledgeFile = new KnowledgeFile();
+//
+//                    knowledgeFile.setKnowledgeId(kbId);
+//                    knowledgeFile.setFileName(file.getOriginalFilename());
+//                    knowledgeFile.setFilePath(filePath);
+//                    knowledgeFile.setFileType(file.getContentType());
+//                    knowledgeFile.setFileSize(file.getSize());
+//                    knowledgeFile.setUploader(userId);
+//                    knowledgeFile.setUploadTime(LocalDateTime.now());
+//
+//                    knowledgeFiles.add(knowledgeFile);
+//
+//                } else {
+//                    throw new BusinessException(ResponseStatusEnum.FAILED);
+//                    // TODO: 删除之前上传的文件
+//                }
+//            } catch (Exception e) {
+//                throw new BusinessException(ResponseStatusEnum.FAILED);
+//            }
+//        }
+//
+//        Boolean res = milvusService.insert(
+//            knowledgeBase.getKnowledgeName(),
+//            knowledgeFiles.stream().map(KnowledgeFile::getFileId).toList(),
+//            knowledgeFiles.stream().map(KnowledgeFile::getVectorList).toList(),
+//            knowledgeFiles.stream().map(KnowledgeFile::getFileId).toList()
+//        );
+//
+//    }
 }

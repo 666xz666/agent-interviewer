@@ -79,6 +79,7 @@ public class OssUtils {
             System.out.println("Error Code:" + oe.getErrorCode());
             System.out.println("Request ID:" + oe.getRequestId());
             System.out.println("Host ID:" + oe.getHostId());
+            return null;
         } finally {
             if (ossClient != null) {
                 ossClient.shutdown();

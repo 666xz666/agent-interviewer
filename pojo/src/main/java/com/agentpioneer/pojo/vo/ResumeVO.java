@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.time.LocalDateTime;
+
 @Data
 @ToString
 @AllArgsConstructor
@@ -32,5 +34,10 @@ public class ResumeVO {
      * 处理失败时的错误信息
      */
     private String errorMessage;
+
+    /**
+     * 创建时间
+     */
+    private LocalDateTime createdAt;
 
 }

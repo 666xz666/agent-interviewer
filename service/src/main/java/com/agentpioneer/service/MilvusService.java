@@ -13,7 +13,12 @@ public interface MilvusService {
 
     void create(String collectionName, String desc);
 
-    Boolean insert(String name, List<Long> textIds, List<List<Float>> vectorList, List<Long> fileIdList);
+    Boolean insert(
+            String name,
+            List<Long> textIds,
+            List<List<Float>> vectorList,
+            List<Long> fileIdList
+    );
 
     List<Long> search(String name, int topK, List<List<Float>> vectorList);
 
