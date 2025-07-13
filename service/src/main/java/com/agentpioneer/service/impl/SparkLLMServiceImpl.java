@@ -42,13 +42,18 @@ public class SparkLLMServiceImpl implements SparkLLMService {
 
         // 处理历史记录
         List<History> histories = chatBO.getHistories();
-        histories.stream().map(h -> {
-            if (h.getRole().equals(ChatRoleEnum.USER)) {
-                return SparkMessage.userContent(h.getContent());
-            } else {
-                return SparkMessage.assistantContent(h.getContent());
-            }
-        }).forEach(messages::add);
+        if (histories != null) {
+            histories.stream()
+                    .filter(h -> h != null && h.getRole() != null && h.getContent() != null) // 可选：再加一层防御
+                    .map(h -> {
+                        if (ChatRoleEnum.USER.equals(h.getRole())) {
+                            return SparkMessage.userContent(h.getContent());
+                        } else {
+                            return SparkMessage.assistantContent(h.getContent());
+                        }
+                    })
+                    .forEach(messages::add);
+        }
 
         messages.add(SparkMessage.userContent(chatBO.getContent()));
 

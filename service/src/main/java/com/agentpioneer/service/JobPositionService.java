@@ -14,4 +14,6 @@ public interface JobPositionService {
     public List<JobPositionVO> listJobPositions() throws BusinessException;
 
     public Boolean exists(Long id);
+
+    public String getJobPrompt(Long jobId) throws BusinessException;
 }

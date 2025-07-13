@@ -21,7 +21,7 @@ import java.util.*;
 
 
 @Service
-public class ResumeImpl implements ResumeService {
+public class ResumeServiceImpl implements ResumeService {
 
 
     @Autowired

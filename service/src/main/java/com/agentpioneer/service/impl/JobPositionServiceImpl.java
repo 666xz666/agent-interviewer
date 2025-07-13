@@ -45,4 +45,16 @@ public class JobPositionServiceImpl implements JobPositionService {
         queryWrapper.eq("job_id", id);
         return jobPositionMapper.exists(queryWrapper);
     }
+
+    @Override
+    public String getJobPrompt(Long jobId) throws BusinessException {
+        QueryWrapper<JobPosition> jobPositionQueryWrapper = new QueryWrapper<>();
+        jobPositionQueryWrapper.eq("job_id", jobId);
+        JobPosition jobPosition = jobPositionMapper.selectOne(jobPositionQueryWrapper);
+        if (jobPosition == null) throw new BusinessException(ResponseStatusEnum.FAILED);
+
+        String res = "Job Name: " + jobPosition.getJobName() + "\n";
+        res += "Job Description: " + jobPosition.getJobDescription();
+        return res;
+    }
 }

@@ -2,7 +2,6 @@ package com.agentpioneer.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -12,7 +11,7 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author agentpioneer
- * @since 2025-06-11
+ * @since 2025-07-12
  */
 public class Interview implements Serializable {
 
@@ -58,6 +57,16 @@ public class Interview implements Serializable {
      * 创建时间
      */
     private LocalDateTime createdAt;
+
+    /**
+     * 指定的AI面试官ID（关联ai_interviewer表）
+     */
+    private Long interviewerId;
+
+    /**
+     * 使用的简历ID
+     */
+    private Long resumeId;
 
     public Long getInterviewId() {
         return interviewId;
@@ -123,6 +132,22 @@ public class Interview implements Serializable {
         this.createdAt = createdAt;
     }
 
+    public Long getInterviewerId() {
+        return interviewerId;
+    }
+
+    public void setInterviewerId(Long interviewerId) {
+        this.interviewerId = interviewerId;
+    }
+
+    public Long getResumeId() {
+        return resumeId;
+    }
+
+    public void setResumeId(Long resumeId) {
+        this.resumeId = resumeId;
+    }
+
     @Override
     public String toString() {
         return "Interview{" +
@@ -134,6 +159,7 @@ public class Interview implements Serializable {
         ", status = " + status +
         ", rabbitmqTotalJobId = " + rabbitmqTotalJobId +
         ", createdAt = " + createdAt +
+                ", interviewerId = " + interviewerId +
         "}";
     }
 }
