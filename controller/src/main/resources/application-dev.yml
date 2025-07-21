@@ -58,3 +58,6 @@ aliyun: #阿里云OSS的配置
       access-key-id: ${AK_ID}
       secret-access-key: ${S_AK}
       bucket: ${BUCKET_NAME}
+
+qwen:
+  api-key: ${DASH_AK}

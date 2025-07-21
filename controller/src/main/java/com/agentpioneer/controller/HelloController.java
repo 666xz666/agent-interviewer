@@ -12,6 +12,13 @@ import com.agentpioneer.service.SparkLLMService;
 import com.agentpioneer.xunfei.WebTtsWs;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import dev.langchain4j.community.model.qianfan.QianfanChatModel;
+import dev.langchain4j.model.chat.ChatLanguageModel;
+import dev.langchain4j.model.openai.OpenAiChatModel;
+import dev.langchain4j.model.output.structured.Description;
+import dev.langchain4j.service.AiServices;
+import dev.langchain4j.service.UserMessage;
 import io.github.briqt.spark4j.SparkClient;
 import io.github.briqt.spark4j.constant.SparkApiVersion;
 import io.github.briqt.spark4j.exception.SparkException;
@@ -45,6 +52,7 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Sinks;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -421,5 +429,84 @@ public class HelloController {
         String collectionName = "test_collection";
         milvusService.dropCollect(collectionName);
         return "Collection " + collectionName + " dropped successfully";
+    }
+
+
+    @GetMapping("qwen")
+    public GraceJSONResult qwen() {
+        String promptTemplate = "请根据以下面试者的表现，按照给定的评价指标进行评分（0-100分）并给出评价字符串。\n";
+
+//        QianfanChatModel model =
+//                QianfanChatModel.builder()
+//                        .apiKey("FNNwfaQBIWOtZvR0wPJmENZs")
+//                        .secretKey("hTMVLkcraQAiP3A4aZE1H0BVn2Iu1ENt")
+//                        .modelName("Yi-34B-Chat")
+//                        .build();
+
+//        OpenAiChatModel model = OpenAiChatModel.builder()
+//                .apiKey("bce-v3/ALTAK-MszP7E8rrMmfHV15sRFUz/a255f2e99ac1c54dda182c5e5a1e5bc43d9e5395")
+//                .baseUrl("https://qianfan.baidubce.com/v2")
+//                .modelName("ernie-3.5-8k")
+//                .strictJsonSchema(true)
+//                .build();
+        QianfanChatModel model = QianfanChatModel.builder()
+                .apiKey("FNNwfaQBIWOtZvR0wPJmENZs")
+                .secretKey("hTMVLkcraQAiP3A4aZE1H0BVn2Iu1ENt")
+                .modelName("Yi-34B-Chat")
+                .build();
+
+//        class
+//
+//        interface SentimentAnalyzer {
+//            @UserMessage("Does {{it}} has a positive sentiment?")
+//            boolean isPositive(String text);
+//        }
+//
+//        SentimentAnalyzer sentimentAnalyzer = AiServices.create(SentimentAnalyzer.class, model);
+//
+//        boolean positive = sentimentAnalyzer.isPositive("It's wonderful!");
+//
+//        return GraceJSONResult.ok(positive);
+
+        // you can add an optional description to help an LLM have a better understanding
+        class Address {
+            String street;
+            Integer streetNumber;
+            String city;
+        }
+
+        class Person {
+
+            @Description("first name of a person") // you can add an optional description to help an LLM have a better understanding
+            String firstName;
+            String lastName;
+            LocalDate birthDate;
+            @Description("an address")
+            Address address;
+        }
+
+
+        interface PersonExtractor {
+
+            @UserMessage("Extract information about a person from {{it}}")
+            Person extractPersonFrom(String text);
+        }
+
+        PersonExtractor personExtractor = AiServices.create(PersonExtractor.class, model);
+
+        String text = """
+                In 1968, amidst the fading echoes of Independence Day,
+                a child named John arrived under the calm evening sky.
+                This newborn, bearing the surname Doe, marked the start of a new journey.
+                He was welcomed into the world at 345 Whispering Pines Avenue
+                a quaint street nestled in the heart of Springfield
+                an abode that echoed with the gentle hum of suburban dreams and aspirations.
+                """;
+
+        Person person = personExtractor.extractPersonFrom(text);
+
+        System.out.println(person);
+
+        return GraceJSONResult.ok(person);
     }
 }

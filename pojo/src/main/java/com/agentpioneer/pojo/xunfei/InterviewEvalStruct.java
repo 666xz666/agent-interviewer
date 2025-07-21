@@ -1,4 +1,4 @@
-package com.agentpioneer.pojo.vo;
+package com.agentpioneer.pojo.xunfei;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,8 +9,6 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class InterviewQueryVO {
-    String content;
-    String videoUrl;
-    String action;
+public class InterviewEvalStruct {
+    int expression;
 }

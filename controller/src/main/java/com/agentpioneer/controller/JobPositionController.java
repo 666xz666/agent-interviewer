@@ -102,4 +102,13 @@ public class JobPositionController {
         }
     }
 
+    @Operation(
+            summary = "岗位具体信息",
+            description = "根据jobId获取岗位具体信息"
+    )
+    @GetMapping("info")
+    public GraceJSONResult infoJobPosition(Long jobId) {
+        return GraceJSONResult.ok(jobPositionService.info(jobId));
+    }
+
 }

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.util.List;
+import java.util.Map;
 
 @Data
 @ToString
@@ -16,6 +17,5 @@ public class QaContent {
     String query;
     String answer;
     List<Double> expression; // 表情的概率
-    List<Integer> scores;
-    List<String> reasons;
+    Map<String, Object> evalMap;
 }

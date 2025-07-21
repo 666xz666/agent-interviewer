@@ -6,7 +6,6 @@ import com.agentpioneer.pojo.bo.UserUpdateBO;
 import org.springframework.stereotype.Service;
 import com.agentpioneer.result.BusinessException;
 
-@Service
 public interface UserService {
     boolean register(AuthBO authBO);
     User validate(AuthBO authBO);

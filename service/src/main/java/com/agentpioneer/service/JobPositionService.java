@@ -16,4 +16,6 @@ public interface JobPositionService {
     public Boolean exists(Long id);
 
     public String getJobPrompt(Long jobId) throws BusinessException;
+
+    public JobPosition info(Long id) throws BusinessException;
 }

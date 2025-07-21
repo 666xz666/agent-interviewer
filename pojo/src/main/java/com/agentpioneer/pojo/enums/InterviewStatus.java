@@ -4,9 +4,9 @@ import com.baomidou.mybatisplus.annotation.EnumValue;
 
 public enum InterviewStatus {
     PROCESSING("PROCESSING", "处理中"),
-    SUCCESS("SUCCESS", "处理成功"),
+    EVALUATING("EVALUATING", "评估中"),
     FAILED("FAILED", "处理失败"),
-    CANCELLED("CANCELLED", "已取消");
+    COMPLETED("COMPLETED", "已完成");
 
     @EnumValue          // MyBatis-Plus 将使用该值与数据库交互
     private final String code;

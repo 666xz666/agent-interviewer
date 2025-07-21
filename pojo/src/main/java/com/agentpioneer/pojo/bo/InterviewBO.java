@@ -13,4 +13,5 @@ public class InterviewBO {
     Long interviewerId;
     Long resumeId;
     Long KnowledgeBaseId;
+    Long jobId;
 }

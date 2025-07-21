@@ -105,7 +105,10 @@ public class ResumeServiceImpl implements ResumeService {
         if (resume.getStatus().equals(ResumeStatus.PROCESSING.toString())) {
             throw new BusinessException(ResponseStatusEnum.RESUME_PROCESSING);
         }
-        BeanUtils.copyProperties(resumeUpdateBO, resume);
+        resume.setOriginalFileName(resumeUpdateBO.getOriginalFileName());
+        ResumeBO resumeBO = new ResumeBO();
+        BeanUtils.copyProperties(resumeUpdateBO, resumeBO);
+        resume.setStructuredData(JsonUtils.objectToJson(resumeBO));
         resumeMapper.updateById(resume);
     }
 }

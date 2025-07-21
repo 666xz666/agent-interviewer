@@ -1,24 +1,28 @@
 package com.agentpioneer.config;
 
-import org.springframework.amqp.rabbit.connection.ConnectionFactory;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
-import org.springframework.amqp.support.converter.MessageConverter;
+import com.agentpioneer.constants.RabbitMQConstants;
+import org.springframework.amqp.core.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class RabbitMQConfig {
-    
+
     @Bean
-    public MessageConverter jsonMessageConverter() {
-        return new Jackson2JsonMessageConverter();
+    public Queue interviewEvaluationQueue() {
+        return QueueBuilder.durable(RabbitMQConstants.QUEUE_INTERVIEW_EVALUATION).build();
     }
-    
+
     @Bean
-    public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
-        RabbitTemplate template = new RabbitTemplate(connectionFactory);
-        template.setMessageConverter(jsonMessageConverter());
-        return template;
+    public TopicExchange interviewEvaluationExchange() {
+        return ExchangeBuilder.topicExchange(RabbitMQConstants.EXCHANGE_INTERVIEW_EVALUATION).durable(true).build();
+    }
+
+    @Bean
+    public Binding interviewEvaluationBinding() {
+        return BindingBuilder
+                .bind(interviewEvaluationQueue())
+                .to(interviewEvaluationExchange())
+                .with(RabbitMQConstants.ROUTING_KEY_INTERVIEW_EVALUATION);
     }
 };

@@ -9,8 +9,6 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class InterviewQueryVO {
+public class QueryVO {
     String content;
-    String videoUrl;
-    String action;
 }

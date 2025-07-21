@@ -57,4 +57,13 @@ public class JobPositionServiceImpl implements JobPositionService {
         res += "Job Description: " + jobPosition.getJobDescription();
         return res;
     }
+
+    @Override
+    public JobPosition info(Long id) throws BusinessException {
+        QueryWrapper<JobPosition> jobPositionQueryWrapper = new QueryWrapper<>();
+        jobPositionQueryWrapper.eq("job_id", id);
+        JobPosition jobPosition = jobPositionMapper.selectOne(jobPositionQueryWrapper);
+        if (jobPosition == null) throw new BusinessException(ResponseStatusEnum.FAILED);
+        return jobPosition;
+    }
 }
